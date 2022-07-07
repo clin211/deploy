@@ -5,35 +5,53 @@ name: Node.js CI
 
 on:
   push:
-    branches: [ main ]
+    branches: [main]
   pull_request:
-    branches: [ main ]
+    branches: [main]
 
 jobs:
-  build:
-
+  file_sync:
     runs-on: ubuntu-latest
-
+    steps:
+      - name: Fetching Local Repository
+        uses: actions/checkout@master
+      - name: File Sync
+        uses: kbrashears5/github-action-file-sync@v2.0.0
+        with:
+          REPOSITORIES: |
+            Forest-211/sync-project@main
+          FILES: |
+            src
+            public
+            .gitignore=.gitignore
+            babel.config.js=babel.config.js
+            package.json=package.json
+            README.md=README.md
+            vue.config.js=vue.config.js
+            yarn.lock=yarn.lock
+          TOKEN: ${{ secrets.ACTIONS }}
+  build:
+    runs-on: ubuntu-latest
     strategy:
       matrix:
         node-version: [14.x]
         # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
 
     steps:
-    - uses: actions/checkout@v2
-    - name: Use Node.js ${{ matrix.node-version }}
-      uses: actions/setup-node@v2
-      with:
-        node-version: ${{ matrix.node-version }}
-    - run: yarn
-    - run: yarn build --if-present
-    - name: deploy to server
-      uses: AEnterprise/rsync-deploy@v1.0
-      env:
-        DEPLOY_KEY: ${{ secrets.SERVER_SSH_KEY }}
-        ARGS: "-e -c -r --delete"
-        SERVER_PORT: ${{ secrets.SERVER_PORT }}
-        FOLDER: "dist/"
-        SERVER_IP: ${{ secrets.SERVER_IP }}
-        USERNAME: ${{ secrets.USERNAME }}
-        SERVER_DESTINATION: ${{ secrets.SERVER_DESTINATION }}
+      - uses: actions/checkout@v2
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v2
+        with:
+          node-version: ${{ matrix.node-version }}
+      - run: yarn
+      - run: yarn build --if-present
+      - name: deploy to server
+        uses: AEnterprise/rsync-deploy@v1.0
+        env:
+          DEPLOY_KEY: ${{ secrets.SERVER_SSH_KEY }}
+          ARGS: "-e -c -r --delete"
+          SERVER_PORT: ${{ secrets.SERVER_PORT }}
+          FOLDER: "dist/"
+          SERVER_IP: ${{ secrets.SERVER_IP }}
+          USERNAME: ${{ secrets.USERNAME }}
+          SERVER_DESTINATION: ${{ secrets.SERVER_DESTINATION }}
