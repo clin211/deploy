@@ -1,6 +1,6 @@
 <template>
     <img alt="Vue logo" src="./assets/logo.png" />
-    <HelloWorld msg="自动化部署成功啦~~~~~~~~~~" />
+    <HelloWorld msg="自动化部署成功啦" />
 </template>
 
 <script>
