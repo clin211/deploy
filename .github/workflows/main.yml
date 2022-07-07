@@ -21,8 +21,8 @@ jobs:
           REPOSITORIES: |
             Forest-211/sync-project
           FILES: |
-            src=src
-            public=public
+            src/=src/
+            public/=public/
             .gitignore=.gitignore
             babel.config.js=babel.config.js
             package.json=package.json
