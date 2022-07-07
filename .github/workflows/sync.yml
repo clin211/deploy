@@ -1,0 +1,20 @@
+name: test workflow
+
+on: [push]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v1
+      - name: My action
+        uses: Andre601/repository-sync@master
+        env:
+          PAT: ${{ secrets.ACTIONS }}
+          EMAIL: 767425412@qq.com
+          USER: Forest-211
+          OWNER: Forest-211
+          REPO: sync-project
+          TARGET_FOLDER: deploy
+          EXCLUDE: "README.md"
+          PUSH_MESSAGE: "Updating target repo"
