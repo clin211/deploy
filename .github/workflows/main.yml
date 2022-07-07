@@ -13,25 +13,33 @@ jobs:
   repo_settings_sync:
     runs-on: ubuntu-latest
     steps:
-      - name: Repo Setup
-        uses: kbrashears5/github-action-repo-settings-sync@v1.0.0
+      - name: Sync with exclude
+        uses: kai-tub/external-repo-sync-action@v1
         with:
-          REPOSITORIES: |
-            Forest-211/sync-project
-          ALLOW_ISSUES: "true"
-          ALLOW_PROJECTS: "true"
-          ALLOW_WIKI: "true"
-          SQUASH_MERGE: "true"
-          MERGE_COMMIT: "true"
-          REBASE_MERGE: "true"
-          AUTO_MERGE: "true"
-          DELETE_HEAD: "false"
-          BRANCH_PROTECTION_NAME: "main"
-          BRANCH_PROTECTION_REQUIRED_REVIEWERS: "1"
-          BRANCH_PROTECTION_DISMISS: "true"
-          BRANCH_PROTECTION_CODE_OWNERS: "true"
-          BRANCH_PROTECTION_ENFORCE_ADMINS: "false"
-          TOKEN: ${{ secrets.ACTIONS }}
+          repository: "Forest-211/sync-project" # 被同步的repo
+          source-directory: "./source" # 源目录
+          exclude-patterns: "*.spec.js" # 被排除的文件，多个文件在引号内用空格隔开
+        env:
+          GH_ACCESS_TOKEN: ${{ secrets.ACTIONS }}
+      # - name: Repo Setup
+      #   uses: kbrashears5/github-action-repo-settings-sync@v1.0.0
+      #   with:
+      #     REPOSITORIES: |
+      #       Forest-211/sync-project
+      #     ALLOW_ISSUES: "true"
+      #     ALLOW_PROJECTS: "true"
+      #     ALLOW_WIKI: "false"
+      #     SQUASH_MERGE: "true"
+      #     MERGE_COMMIT: "true"
+      #     REBASE_MERGE: "true"
+      #     AUTO_MERGE: "true"
+      #     DELETE_HEAD: "false"
+      #     BRANCH_PROTECTION_NAME: "main"
+      #     BRANCH_PROTECTION_REQUIRED_REVIEWERS: "1"
+      #     BRANCH_PROTECTION_DISMISS: "true"
+      #     BRANCH_PROTECTION_CODE_OWNERS: "false"
+      #     BRANCH_PROTECTION_ENFORCE_ADMINS: "false"
+      #     TOKEN: ${{ secrets.ACTIONS }}
   # file_sync:
   #   runs-on: ubuntu-latest
   #   steps:
