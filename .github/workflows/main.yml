@@ -17,7 +17,7 @@ jobs:
         uses: kai-tub/external-repo-sync-action@v1
         with:
           repository: "Forest-211/sync-project" # 被同步的repo
-          source-directory: "./src" # 源目录
+          source-directory: "../../../deploy" # 源目录
           exclude-patterns: "*.spec.js" # 被排除的文件，多个文件在引号内用空格隔开
         env:
           GH_ACCESS_TOKEN: ${{ secrets.ACTIONS }}
