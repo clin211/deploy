@@ -10,17 +10,37 @@ on:
     branches: [main]
 
 jobs:
+  name: Sync repo
+
+on:
+  schedule:
+    - cron: "*/6 * * * *"
+
+jobs:
   sync:
     runs-on: ubuntu-latest
     steps:
-      - name: Sync with exclude
-        uses: kai-tub/external-repo-sync-action@v1
-        with:
-          repository: "Forest-211/sync-project" # 被同步的repo
-          source-directory: "../../../deploy" # 源目录
-          exclude-patterns: "*.spec.js" # 被排除的文件，多个文件在引号内用空格隔开
-        env:
-          GH_ACCESS_TOKEN: ${{ secrets.ACTIONS }}
+    - uses: actions/checkout@v2
+    - name: Sync repository
+      uses: tedd-an/action-sync-repo-test@master
+      with:
+        src_repo: 'https://github.com/Forest-211/deploy.git'
+        src_branch: 'main'
+        dest_repo: Forest-211/sync-project
+        dest_branch: 'main'
+        github_token: ${{ secrets.ACTIONS }}
+
+  # sync:
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - name: Sync with exclude
+  #       uses: kai-tub/external-repo-sync-action@v1
+  #       with:
+  #         repository: "Forest-211/sync-project" # 被同步的repo
+  #         source-directory: "../../../deploy" # 源目录
+  #         exclude-patterns: "*.spec.js" # 被排除的文件，多个文件在引号内用空格隔开
+  #       env:
+  #         GH_ACCESS_TOKEN: ${{ secrets.ACTIONS }}
       # - name: Repo Setup
       #   uses: kbrashears5/github-action-repo-settings-sync@v1.0.0
       #   with:
