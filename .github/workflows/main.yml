@@ -13,16 +13,19 @@ jobs:
   sync:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
-      - name: Sync repository
-        uses: tedd-an/action-sync-repo-test@master
-        with:
-          src_repo: "https://github.com/Forest-211/deploy.git"
-          src_branch: "main"
-          dest_repo: Forest-211/sync-project
-          dest_branch: "main"
-          github_token: ${{ secrets.ACTIONS }}
-
+      - uses: actions/checkout@v1
+      - name: Sync Repository
+        uses: Andre601/repository-sync
+        env:
+          PAT: ${{ secrets.ACTIONS }}
+          EMAIL: 767425412@qq.com
+          USER: Forest
+          OWNER: Forest
+          REPO: Forest-211/sync-project
+          # SRC_FOLDER: cat-images
+          # TARGET_FOLDER: images/cat-images
+          EXCLUDE: "src/app.spec.js"
+          PUSH_MESSAGE: "sync project"
   # sync:
   #   runs-on: ubuntu-latest
   #   steps:
