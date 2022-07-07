@@ -19,8 +19,8 @@ jobs:
         env:
           PAT: ${{ secrets.ACTIONS }}
           EMAIL: 767425412@qq.com
-          USER: Forest
-          OWNER: Forest
+          USER: Forest-211
+          OWNER: Forest-211
           REPO: Forest-211/sync-project
           # SRC_FOLDER: .
           # TARGET_FOLDER: .
