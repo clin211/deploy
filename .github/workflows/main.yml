@@ -22,8 +22,8 @@ jobs:
           USER: Forest
           OWNER: Forest
           REPO: Forest-211/sync-project
-          SRC_FOLDER: .
-          TARGET_FOLDER: .
+          # SRC_FOLDER: .
+          # TARGET_FOLDER: .
           EXCLUDE: "src/app.spec.js"
           PUSH_MESSAGE: "sync project"
   # sync:
