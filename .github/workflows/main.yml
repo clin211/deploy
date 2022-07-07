@@ -21,7 +21,7 @@ jobs:
           EMAIL: 767425412@qq.com
           USER: Forest-211
           OWNER: Forest-211
-          REPO: Forest-211/sync-project
+          REPO: sync-project
           # SRC_FOLDER: .
           # TARGET_FOLDER: .
           EXCLUDE: "src/app.spec.js"
