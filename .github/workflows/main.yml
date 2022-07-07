@@ -10,25 +10,18 @@ on:
     branches: [main]
 
 jobs:
-  name: Sync repo
-
-on:
-  schedule:
-    - cron: "*/6 * * * *"
-
-jobs:
   sync:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v2
-    - name: Sync repository
-      uses: tedd-an/action-sync-repo-test@master
-      with:
-        src_repo: 'https://github.com/Forest-211/deploy.git'
-        src_branch: 'main'
-        dest_repo: Forest-211/sync-project
-        dest_branch: 'main'
-        github_token: ${{ secrets.ACTIONS }}
+      - uses: actions/checkout@v2
+      - name: Sync repository
+        uses: tedd-an/action-sync-repo-test@master
+        with:
+          src_repo: "https://github.com/Forest-211/deploy.git"
+          src_branch: "main"
+          dest_repo: Forest-211/sync-project
+          dest_branch: "main"
+          github_token: ${{ secrets.ACTIONS }}
 
   # sync:
   #   runs-on: ubuntu-latest
@@ -41,25 +34,25 @@ jobs:
   #         exclude-patterns: "*.spec.js" # 被排除的文件，多个文件在引号内用空格隔开
   #       env:
   #         GH_ACCESS_TOKEN: ${{ secrets.ACTIONS }}
-      # - name: Repo Setup
-      #   uses: kbrashears5/github-action-repo-settings-sync@v1.0.0
-      #   with:
-      #     REPOSITORIES: |
-      #       Forest-211/sync-project
-      #     ALLOW_ISSUES: "true"
-      #     ALLOW_PROJECTS: "true"
-      #     ALLOW_WIKI: "false"
-      #     SQUASH_MERGE: "true"
-      #     MERGE_COMMIT: "true"
-      #     REBASE_MERGE: "true"
-      #     AUTO_MERGE: "true"
-      #     DELETE_HEAD: "false"
-      #     BRANCH_PROTECTION_NAME: "main"
-      #     BRANCH_PROTECTION_REQUIRED_REVIEWERS: "1"
-      #     BRANCH_PROTECTION_DISMISS: "true"
-      #     BRANCH_PROTECTION_CODE_OWNERS: "false"
-      #     BRANCH_PROTECTION_ENFORCE_ADMINS: "false"
-      #     TOKEN: ${{ secrets.ACTIONS }}
+  # - name: Repo Setup
+  #   uses: kbrashears5/github-action-repo-settings-sync@v1.0.0
+  #   with:
+  #     REPOSITORIES: |
+  #       Forest-211/sync-project
+  #     ALLOW_ISSUES: "true"
+  #     ALLOW_PROJECTS: "true"
+  #     ALLOW_WIKI: "false"
+  #     SQUASH_MERGE: "true"
+  #     MERGE_COMMIT: "true"
+  #     REBASE_MERGE: "true"
+  #     AUTO_MERGE: "true"
+  #     DELETE_HEAD: "false"
+  #     BRANCH_PROTECTION_NAME: "main"
+  #     BRANCH_PROTECTION_REQUIRED_REVIEWERS: "1"
+  #     BRANCH_PROTECTION_DISMISS: "true"
+  #     BRANCH_PROTECTION_CODE_OWNERS: "false"
+  #     BRANCH_PROTECTION_ENFORCE_ADMINS: "false"
+  #     TOKEN: ${{ secrets.ACTIONS }}
   # file_sync:
   #   runs-on: ubuntu-latest
   #   steps:
