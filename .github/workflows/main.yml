@@ -10,7 +10,7 @@ on:
     branches: [main]
 
 jobs:
-  repo_settings_sync:
+  sync:
     runs-on: ubuntu-latest
     steps:
       - name: Sync with exclude
