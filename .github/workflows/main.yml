@@ -22,13 +22,13 @@ jobs:
             Forest-211/sync-project
           FILES: |
             src/=src/
-            public/favicon.ico
-            public/index.html
-            .gitignore=.gitignore
-            babel.config.js=babel.config.js
-            package.json=package.json
-            README.md=README.md
-            vue.config.js=vue.config.js
+            public/favicon.ico=public/favicon.ico
+            public/index.html=public/index.html
+            .gitignore
+            babel.config.js
+            package.json
+            README.md
+            vue.config.js
             yarn.lock
           TOKEN: ${{ secrets.ACTIONS }}
   build:
