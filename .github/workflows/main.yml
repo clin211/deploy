@@ -10,27 +10,50 @@ on:
     branches: [main]
 
 jobs:
-  file_sync:
+  repo_settings_sync:
     runs-on: ubuntu-latest
     steps:
-      - name: Fetching Local Repository
-        uses: actions/checkout@master
-      - name: File Sync
-        uses: kbrashears5/github-action-file-sync@v2.0.0
+      - name: Repo Setup
+        uses: kbrashears5/github-action-repo-settings-sync@v1.0.0
         with:
           REPOSITORIES: |
             Forest-211/sync-project
-          FILES: |
-            src/=src/
-            public/favicon.ico=public/favicon.ico
-            public/index.html=public/index.html
-            .gitignore
-            babel.config.js
-            package.json
-            README.md
-            vue.config.js
-            yarn.lock
+          ALLOW_ISSUES: "true"
+          ALLOW_PROJECTS: "true"
+          ALLOW_WIKI: "true"
+          SQUASH_MERGE: "true"
+          MERGE_COMMIT: "true"
+          REBASE_MERGE: "true"
+          AUTO_MERGE: "true"
+          DELETE_HEAD: "false"
+          BRANCH_PROTECTION_NAME: "main"
+          BRANCH_PROTECTION_REQUIRED_REVIEWERS: "1"
+          BRANCH_PROTECTION_DISMISS: "true"
+          BRANCH_PROTECTION_CODE_OWNERS: "true"
+          BRANCH_PROTECTION_ENFORCE_ADMINS: "false"
           TOKEN: ${{ secrets.ACTIONS }}
+  # file_sync:
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - name: Fetching Local Repository
+  #       uses: actions/checkout@master
+  #     - name: File Sync
+  #       uses: kbrashears5/github-action-file-sync@v2.0.0
+  #       with:
+  #         REPOSITORIES: |
+  #           Forest-211/sync-project
+  #         FILES: |
+  #           src/=src/
+  #           public/favicon.ico=public/favicon.ico
+  #           public/index.html=public/index.html
+  #           .gitignore
+  #           babel.config.js
+  #           package.json
+  #           README.md
+  #           vue.config.js
+  #           yarn.lock
+  #         TOKEN: ${{ secrets.ACTIONS }}
+
   build:
     runs-on: ubuntu-latest
     strategy:
