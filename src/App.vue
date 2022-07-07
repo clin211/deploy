@@ -1,6 +1,9 @@
 <template>
-    <img alt="Vue logo" src="./assets/logo.png" />
-    <HelloWorld msg="自动化部署成功啦" />
+    <div>
+        <img alt="Vue logo" src="./assets/logo.png" />
+        <HelloWorld msg="自动化部署成功啦" />
+        <h2>同步到其他仓库</h2>
+    </div>
 </template>
 
 <script>
