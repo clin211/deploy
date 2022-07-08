@@ -1,20 +1,53 @@
-name: test workflow
+# name: test workflow
 
-on: [push]
+# on: [push]
+
+# jobs:
+#   build:
+#     runs-on: ubuntu-latest
+#     steps:
+#       - uses: actions/checkout@v1
+#       - name: My action
+#         uses: Andre601/repository-sync@master
+#         env:
+#           PAT: ${{ secrets.ACTIONS }}
+#           EMAIL: 767425412@qq.com
+#           USER: Forest-211
+#           OWNER: Forest-211
+#           REPO: sync-project
+#           TARGET_FOLDER: deploy
+#           EXCLUDE: "README.md"
+#           PUSH_MESSAGE: "Updating target repo"
+
+name: Repo Setup
+
+on:
+  push:
+    branches:
+      - master
+  schedule:
+    - cron: 0 0 * * *
 
 jobs:
-  build:
+  repo_setup:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v1
-      - name: My action
-        uses: Andre601/repository-sync@master
-        env:
-          PAT: ${{ secrets.ACTIONS }}
-          EMAIL: 767425412@qq.com
-          USER: Forest-211
-          OWNER: Forest-211
-          REPO: sync-project
-          TARGET_FOLDER: deploy
-          EXCLUDE: "README.md"
-          PUSH_MESSAGE: "Updating target repo"
+      - name: Repo Setup
+        uses: kbrashears5/github-action-repo-settings-sync@v1.0.0
+        with:
+          REPOSITORIES: |
+            Forest-211/sync-project
+          ALLOW_ISSUES: "true"
+          ALLOW_PROJECTS: "true"
+          ALLOW_WIKI: "true"
+          SQUASH_MERGE: "true"
+          MERGE_COMMIT: "true"
+          REBASE_MERGE: "true"
+          AUTO_MERGE: "false"
+          DELETE_HEAD: "false"
+          BRANCH_PROTECTION_NAME: "main"
+          BRANCH_PROTECTION_REQUIRED_REVIEWERS: "1"
+          BRANCH_PROTECTION_DISMISS: "true"
+          BRANCH_PROTECTION_CODE_OWNERS: "true"
+          BRANCH_PROTECTION_ENFORCE_ADMINS: "false"
+          TOKEN: ${{ secrets.ACTIONS }}
